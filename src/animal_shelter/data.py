@@ -29,4 +29,4 @@ def load_data(path):
 def convert_camel_case(name):
     """Convert camelCaseString to snake_case_string."""
     s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower().strip()

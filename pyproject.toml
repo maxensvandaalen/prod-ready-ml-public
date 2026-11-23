@@ -24,6 +24,7 @@ dev = [
     "mypy>=2.4.1",
     "pandas-stubs>=3.1.0.261029",
     "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
     "ruff>=0.17.6",
 ]
 
@@ -34,6 +35,7 @@ extend-select = [
   "N",  # PEP8 names
   "I"  # isort
 ]
+ignore = ["D100"]
 
 [tool.ruff]
 exclude = [
@@ -44,3 +46,6 @@ exclude = [
     ".ruff_cache",
      ".venv"
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"src/tests/*.py" = ["D"]
