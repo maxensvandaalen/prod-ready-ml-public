@@ -30,3 +30,10 @@ repos:
       types: [python]
       pass_filenames: false
       args: ["src/"]
+
+    - id: pytest
+      name: pytest
+      entry: pytest
+      language: system
+      pass_filenames: false
+      always_run: true

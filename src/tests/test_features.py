@@ -5,6 +5,19 @@ from pandas.testing import assert_series_equal
 from animal_shelter import features
 
 
+@pytest.fixture(scope="function")
+def sex_upon_outcome():
+    return pd.Series(
+        [
+            "neutered Female",
+            "NEutered male",
+            "123Spayed234123Female",
+            " intact  Male",
+            "abc",
+        ]
+    )
+
+
 def test_check_has_name():
     s = pd.Series(["Ivo", "Henk", "unknown"])
     result = features.check_has_name(s)
@@ -19,16 +32,14 @@ def test_is_dog():
     assert_series_equal(result, expected)
 
 
-def test_get_sex():
-    s = pd.Series(["Female", "male", "123Female", "   Male"])
-    result = features.get_sex(s)
-    expected = pd.Series(["female", "unknown", "female", "male"])
+def test_get_sex(sex_upon_outcome):
+    result = features.get_sex(sex_upon_outcome)
+    expected = pd.Series(["female", "unknown", "female", "male", "unknown"])
     assert_series_equal(result, expected)
 
 
-def test_get_neutered():
-    s = pd.Series(["neutered", "NEutered", "123Spayed234", "   intact  ", "abc"])
-    result = features.get_neutered(s)
+def test_get_neutered(sex_upon_outcome):
+    result = features.get_neutered(sex_upon_outcome)
     expected = pd.Series(["fixed", "fixed", "fixed", "intact", "unknown"])
     assert_series_equal(result, expected)
 
